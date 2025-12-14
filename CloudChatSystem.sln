@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E1FA21D0-918A-E09C-4E43-8844A3B4813C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudChatApp", "src\CloudChatApp\CloudChatApp.csproj", "{CC3AD9DB-7D35-AA4F-3E61-B7DA8176B0D9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC3AD9DB-7D35-AA4F-3E61-B7DA8176B0D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC3AD9DB-7D35-AA4F-3E61-B7DA8176B0D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC3AD9DB-7D35-AA4F-3E61-B7DA8176B0D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC3AD9DB-7D35-AA4F-3E61-B7DA8176B0D9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CC3AD9DB-7D35-AA4F-3E61-B7DA8176B0D9} = {E1FA21D0-918A-E09C-4E43-8844A3B4813C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4EE6EDC7-A7A6-4D90-B538-D2F1E05BF1C6}
+	EndGlobalSection
+EndGlobal

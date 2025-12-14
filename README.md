@@ -1,0 +1,1 @@
+CloudChatSystem is a cloud-based real-time communication platform developed as my diploma thesis project. The system is designed for online communities and demonstrates modern cloud-native architecture using Microsoft Azure services.
