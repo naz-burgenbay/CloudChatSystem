@@ -1,6 +1,7 @@
 using CloudChatApp.Components;
 using CloudChatApp.Components.Account;
 using CloudChatApp.Data;
+using CloudChatApp.Data.Entities;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

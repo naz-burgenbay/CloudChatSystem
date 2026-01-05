@@ -3,6 +3,7 @@ using System.Text.Json;
 using CloudChatApp.Components.Account.Pages;
 using CloudChatApp.Components.Account.Pages.Manage;
 using CloudChatApp.Data;
+using CloudChatApp.Data.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;

@@ -1,5 +1,6 @@
 using CloudChatApp.Data;
 using Microsoft.AspNetCore.Identity;
+using CloudChatApp.Data.Entities;
 
 namespace CloudChatApp.Components.Account
 {
