@@ -17,7 +17,7 @@ namespace CloudChatApp.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // UserBlock - if blocker deleted, keep record
+            // UserBlock - restrict to prevent multiple cascade paths (handle block cleanup in service)
             modelBuilder.Entity<UserBlock>()
                 .HasOne(ub => ub.BlockingUser)
                 .WithMany(u => u.BlockingUsers)
@@ -52,7 +52,7 @@ namespace CloudChatApp.Data
                 .HasForeignKey(mr => mr.MessageId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // MessageReaction - if user deleted, restrict (preserve reaction history)
+            // MessageReaction - restrict to prevent multiple cascade paths (handle user reaction cleanup in service)
             modelBuilder.Entity<MessageReaction>()
                 .HasOne(mr => mr.User)
                 .WithMany(u => u.MessageReactions)
