@@ -15,9 +15,10 @@ namespace CloudChatApp.Data.Entities
         public Chatroom Chatroom { get; set; } = null!;
         public ChatroomSystemRole SystemRole { get; set; } = ChatroomSystemRole.Member;
 
-        public int? ChatroomRoleId { get; set; }
-        public ChatroomRole? Role { get; set; }
         public DateTime JoinedAt { get; set; } = DateTime.UtcNow;
         public bool IsMuted { get; set; } = false;
+
+        // Navigation for role assignments (multiple roles per member)
+        public ICollection<ChatroomMemberRole> RoleAssignments { get; set; } = new List<ChatroomMemberRole>();
     }
 }

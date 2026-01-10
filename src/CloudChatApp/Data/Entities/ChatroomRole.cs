@@ -9,5 +9,8 @@ namespace CloudChatApp.Data.Entities
         public bool CanDeleteMessages { get; set; }
         public bool CanBanUsers { get; set; }
         public bool CanManageRoles { get; set; }
+
+        // Navigation
+        public ICollection<ChatroomMemberRole> MemberAssignments { get; set; } = new List<ChatroomMemberRole>();
     }
 }

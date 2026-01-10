@@ -16,5 +16,6 @@ namespace CloudChatApp.Data.Entities
         public ICollection<ChatroomMember> Members { get; set; } = new List<ChatroomMember>();
         public ICollection<ChatroomRole> ChatroomRoles { get; set; } = new List<ChatroomRole>();
         public ICollection<Message> Messages { get; set; } = new List<Message>();
+        public ICollection<UserBan> UserBans { get; set; } = new List<UserBan>();
     }
 }

@@ -9,9 +9,11 @@ namespace CloudChatApp.Data
         public DbSet<Chatroom> Chatrooms { get; set; }
         public DbSet<ChatroomMember> ChatroomMembers { get; set; }
         public DbSet<ChatroomRole> ChatroomRoles { get; set; }
+        public DbSet<ChatroomMemberRole> ChatroomMemberRoles { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<MessageReaction> MessageReactions { get; set; }
         public DbSet<UserBlock> UserBlocks { get; set; }
+        public DbSet<UserBan> UserBans { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -66,6 +68,22 @@ namespace CloudChatApp.Data
                 .HasForeignKey(cr => cr.ChatroomId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // ChatroomMemberRole - join table for multiple role assignments per member
+            modelBuilder.Entity<ChatroomMemberRole>()
+                .HasKey(cmr => new { cmr.ChatroomMemberId, cmr.ChatroomRoleId });
+
+            modelBuilder.Entity<ChatroomMemberRole>()
+                .HasOne(cmr => cmr.ChatroomMember)
+                .WithMany(cm => cm.RoleAssignments)
+                .HasForeignKey(cmr => cmr.ChatroomMemberId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ChatroomMemberRole>()
+                .HasOne(cmr => cmr.ChatroomRole)
+                .WithMany(cr => cr.MemberAssignments)
+                .HasForeignKey(cmr => cmr.ChatroomRoleId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             // Message reply - prevent cycles, handle in service
             modelBuilder.Entity<Message>()
                 .HasOne(m => m.ReplyToMessage)
@@ -93,6 +111,27 @@ namespace CloudChatApp.Data
                 .WithMany()
                 .HasForeignKey(c => c.CreatedByUserId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // UserBan - if chatroom deleted, remove bans for that chatroom
+            modelBuilder.Entity<UserBan>()
+                .HasOne(ub => ub.Chatroom)
+                .WithMany(c => c.UserBans)
+                .HasForeignKey(ub => ub.ChatroomId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // UserBan - if banned user deleted, remove their bans (restrict to handle in service)
+            modelBuilder.Entity<UserBan>()
+                .HasOne(ub => ub.BannedUser)
+                .WithMany()
+                .HasForeignKey(ub => ub.BannedUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // UserBan - if moderator deleted, keep ban record (who banned is less important)
+            modelBuilder.Entity<UserBan>()
+                .HasOne(ub => ub.BannedByUser)
+                .WithMany()
+                .HasForeignKey(ub => ub.BannedByUserId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

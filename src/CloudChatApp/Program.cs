@@ -39,6 +39,12 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserBlockService, UserBlockService>();
+builder.Services.AddScoped<IChatroomService, ChatroomService>();
+builder.Services.AddScoped<IChatroomMemberService, ChatroomMemberService>();
+builder.Services.AddScoped<IMessageService, MessageService>();
+builder.Services.AddScoped<IMessageReactionService, MessageReactionService>();
+builder.Services.AddScoped<IChatroomRoleService, ChatroomRoleService>();
+builder.Services.AddScoped<IModerationService, ModerationService>();
 
 var app = builder.Build();
 
