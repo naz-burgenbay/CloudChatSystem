@@ -2,6 +2,7 @@ using CloudChatApp.Components;
 using CloudChatApp.Components.Account;
 using CloudChatApp.Data;
 using CloudChatApp.Data.Entities;
+using CloudChatApp.Hubs;
 using CloudChatApp.Services;
 using CloudChatApp.Services.Interfaces;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -45,6 +46,7 @@ builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddScoped<IMessageReactionService, MessageReactionService>();
 builder.Services.AddScoped<IChatroomRoleService, ChatroomRoleService>();
 builder.Services.AddScoped<IModerationService, ModerationService>();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -70,5 +72,7 @@ app.MapRazorComponents<App>()
 
 // Add additional endpoints required by the Identity /Account Razor components.
 app.MapAdditionalIdentityEndpoints();
+
+app.MapHub<ChatHub>("/chathub");
 
 app.Run();
