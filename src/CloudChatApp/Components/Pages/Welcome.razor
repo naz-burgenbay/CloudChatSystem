@@ -1,0 +1,167 @@
+@page "/"
+
+<PageTitle>Welcome - CloudChat</PageTitle>
+
+<div class="welcome-container">
+    <div class="hero-section">
+        <h1 class="display-4 fw-bold mb-4">Welcome to CloudChat</h1>
+        <p class="lead mb-4">
+            Connect, communicate, and collaborate in real-time with our modern cloud-based chat platform.
+        </p>
+    </div>
+
+    <div class="features-section mt-5">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="bi bi-chat-dots-fill"></span>
+                    </div>
+                    <h3>Real-Time Messaging</h3>
+                    <p>Experience instant communication with our real-time chat technology powered by SignalR.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="bi bi-people-fill"></span>
+                    </div>
+                    <h3>Create Chatrooms</h3>
+                    <p>Build your own communities by creating custom chatrooms for different topics and teams.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="bi bi-shield-check"></span>
+                    </div>
+                    <h3>Secure & Private</h3>
+                    <p>Your conversations are protected with modern security practices and user authentication.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-4">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="bi bi-emoji-smile-fill"></span>
+                    </div>
+                    <h3>Message Reactions</h3>
+                    <p>Express yourself with reactions to messages and engage with your community.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="bi bi-gear-fill"></span>
+                    </div>
+                    <h3>Moderation Tools</h3>
+                    <p>Manage your chatrooms with powerful moderation features and role-based permissions.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="bi bi-cloud-fill"></span>
+                    </div>
+                    <h3>Cloud-Based</h3>
+                    <p>Access your conversations from anywhere with our reliable cloud infrastructure.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-section mt-5 text-center">
+        <AuthorizeView>
+            <Authorized>
+                <h2 class="mb-4">Ready to chat?</h2>
+                <a href="/home" class="btn btn-primary btn-lg px-5">Go to Chatrooms</a>
+            </Authorized>
+            <NotAuthorized>
+                <h2 class="mb-4">Get Started Today</h2>
+                <p class="mb-4">Join thousands of users already chatting on CloudChat</p>
+                <div class="d-flex gap-3 justify-content-center">
+                    <a href="Account/Register" class="btn btn-primary btn-lg px-5">Sign Up</a>
+                    <a href="Account/Login" class="btn btn-outline-primary btn-lg px-5">Login</a>
+                </div>
+            </NotAuthorized>
+        </AuthorizeView>
+    </div>
+</div>
+
+<style>
+    .welcome-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 1rem;
+    }
+
+    .hero-section {
+        text-align: center;
+        padding: 4rem 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 1rem;
+        margin-bottom: 3rem;
+    }
+
+    .features-section {
+        padding: 2rem 0;
+    }
+
+    .feature-card {
+        padding: 2rem;
+        border-radius: 0.5rem;
+        background: #f8f9fa;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-icon {
+        font-size: 3rem;
+        color: #667eea;
+        margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+
+    .feature-card p {
+        color: #6c757d;
+        margin-bottom: 0;
+    }
+
+    .cta-section {
+        padding: 4rem 2rem;
+        background: #f8f9fa;
+        border-radius: 1rem;
+    }
+
+    .cta-section h2 {
+        font-weight: 700;
+    }
+
+    @@media (max-width: 768px) {
+        .hero-section {
+            padding: 2rem 1rem;
+        }
+
+        .feature-card {
+            margin-bottom: 1rem;
+        }
+    }
+</style>

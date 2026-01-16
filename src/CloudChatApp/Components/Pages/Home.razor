@@ -1,7 +1,306 @@
-﻿@page "/"
+﻿@page "/home"
+@using CloudChatApp.Data.Entities
+@using CloudChatApp.Services.Interfaces
+@using Microsoft.AspNetCore.Authorization
+@inject IChatroomService ChatroomService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager Navigation
+@attribute [Authorize]
 
-<PageTitle>Home</PageTitle>
+<PageTitle>My Chatrooms - CloudChat</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="chatrooms-container">
+    <div class="header-section mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="display-6 fw-bold mb-0">My Chatrooms</h1>
+            <button class="btn btn-primary" @onclick="ShowCreateModal">
+                <span class="bi bi-plus-circle"></span> Create Chatroom
+            </button>
+        </div>
+    </div>
 
-Welcome to your new app.
+    @if (isLoading)
+    {
+        <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-3 text-muted">Loading your chatrooms...</p>
+        </div>
+    }
+    else if (chatrooms == null || !chatrooms.Any())
+    {
+        <div class="empty-state text-center py-5">
+            <div class="empty-icon mb-3">
+                <span class="bi bi-chat-dots" style="font-size: 4rem; color: #6c757d;"></span>
+            </div>
+            <h3>No chatrooms yet</h3>
+            <p class="text-muted mb-4">Create your first chatroom to start chatting with others!</p>
+            <button class="btn btn-primary btn-lg" @onclick="ShowCreateModal">
+                <span class="bi bi-plus-circle"></span> Create Your First Chatroom
+            </button>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var chatroom in chatrooms)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="chatroom-card" @onclick="() => NavigateToChatroom(chatroom.ChatroomId)">
+                        <div class="chatroom-icon">
+                            @if (!string.IsNullOrEmpty(chatroom.IconUrl))
+                            {
+                                <img src="@chatroom.IconUrl" alt="@chatroom.Name" />
+                            }
+                            else
+                            {
+                                <span class="bi bi-chat-fill"></span>
+                            }
+                        </div>
+                        <h5 class="chatroom-name">@chatroom.Name</h5>
+                        @if (!string.IsNullOrEmpty(chatroom.Description))
+                        {
+                            <p class="chatroom-description">@chatroom.Description</p>
+                        }
+                        <div class="chatroom-meta">
+                            <span class="badge bg-secondary">
+                                <span class="bi bi-people-fill"></span> @chatroom.Members.Count members
+                            </span>
+                            <span class="badge bg-info text-dark">
+                                <span class="bi bi-chat-left-text-fill"></span> @chatroom.Messages.Count messages
+                            </span>
+                        </div>
+                        <div class="chatroom-footer">
+                            <small class="text-muted">Created @chatroom.CreatedAt.ToShortDateString()</small>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    @if (showCreateModal)
+    {
+        <div class="modal-backdrop show"></div>
+        <div class="modal show d-block" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Create New Chatroom</h5>
+                        <button type="button" class="btn-close" @onclick="HideCreateModal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="chatroomName" class="form-label">Chatroom Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="chatroomName" @bind="newChatroomName" placeholder="Enter chatroom name" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="chatroomDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="chatroomDescription" rows="3" @bind="newChatroomDescription" placeholder="Enter chatroom description (optional)"></textarea>
+                        </div>
+                        @if (!string.IsNullOrEmpty(errorMessage))
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                @errorMessage
+                            </div>
+                        }
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" @onclick="HideCreateModal">Cancel</button>
+                        <button type="button" class="btn btn-primary" @onclick="CreateChatroom" disabled="@isCreating">
+                            @if (isCreating)
+                            {
+                                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            }
+                            Create
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .chatrooms-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    .header-section {
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #e9ecef;
+    }
+
+    .chatroom-card {
+        background: white;
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .chatroom-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .chatroom-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+        color: white;
+    }
+
+    .chatroom-icon img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .chatroom-name {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #212529;
+    }
+
+    .chatroom-description {
+        color: #6c757d;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        flex-grow: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .chatroom-meta {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .chatroom-footer {
+        padding-top: 0.75rem;
+        border-top: 1px solid #e9ecef;
+    }
+
+    .empty-state {
+        background: #f8f9fa;
+        border-radius: 0.75rem;
+        padding: 3rem 2rem;
+    }
+
+    .modal-backdrop {
+        opacity: 0.5;
+    }
+
+    @@media (max-width: 768px) {
+        .chatrooms-container {
+            padding: 1rem 0.5rem;
+        }
+
+        .header-section {
+            flex-direction: column;
+            gap: 1rem;
+        }
+    }
+</style>
+
+@code {
+    private IEnumerable<Chatroom>? chatrooms;
+    private bool isLoading = true;
+    private bool showCreateModal = false;
+    private bool isCreating = false;
+    private string newChatroomName = string.Empty;
+    private string newChatroomDescription = string.Empty;
+    private string errorMessage = string.Empty;
+    private string userId = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity?.IsAuthenticated == true)
+        {
+            userId = user.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
+            await LoadChatrooms();
+        }
+
+        isLoading = false;
+    }
+
+    private async Task LoadChatrooms()
+    {
+        if (!string.IsNullOrEmpty(userId))
+        {
+            chatrooms = await ChatroomService.GetUserChatroomsAsync(userId);
+        }
+    }
+
+    private void ShowCreateModal()
+    {
+        showCreateModal = true;
+        errorMessage = string.Empty;
+        newChatroomName = string.Empty;
+        newChatroomDescription = string.Empty;
+    }
+
+    private void HideCreateModal()
+    {
+        showCreateModal = false;
+        errorMessage = string.Empty;
+    }
+
+    private async Task CreateChatroom()
+    {
+        errorMessage = string.Empty;
+
+        if (string.IsNullOrWhiteSpace(newChatroomName))
+        {
+            errorMessage = "Chatroom name is required.";
+            return;
+        }
+
+        try
+        {
+            isCreating = true;
+            var newChatroom = await ChatroomService.CreateChatroomAsync(userId, newChatroomName.Trim(), newChatroomDescription.Trim());
+            
+            HideCreateModal();
+            await LoadChatrooms();
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Failed to create chatroom: {ex.Message}";
+        }
+        finally
+        {
+            isCreating = false;
+        }
+    }
+
+    private void NavigateToChatroom(int chatroomId)
+    {
+        Navigation.NavigateTo($"/chatroom/{chatroomId}");
+    }
+}
