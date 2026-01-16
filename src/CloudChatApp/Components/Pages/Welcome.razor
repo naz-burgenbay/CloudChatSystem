@@ -1,167 +1,334 @@
 @page "/"
-
 <PageTitle>Welcome - CloudChat</PageTitle>
 
-<div class="welcome-container">
-    <div class="hero-section">
-        <h1 class="display-4 fw-bold mb-4">Welcome to CloudChat</h1>
-        <p class="lead mb-4">
-            Connect, communicate, and collaborate in real-time with our modern cloud-based chat platform.
+<!-- TOP WINDOW BAR -->
+<div class="xp-topbar">
+    <div class="xp-title">CloudChat XP Edition</div>
+</div>
+
+<!-- MAIN WINDOW -->
+<div class="welcome-container xp-window">
+
+    <!-- HERO / INTRO -->
+    <section class="hero-section">
+        <h1>Welcome to CloudChat</h1>
+        <p>
+            Connect, communicate, and collaborate in real-time  
+            with our modern cloud-based chat platform.
         </p>
+    </section>
+
+    <!-- BANNER -->
+    <div class="xp-banner">
+        <marquee>💾 Welcome to CloudChat XP Edition — A modern real-time messaging platform designed for teams, communities and secure online communication. Chat faster, collaborate smarter, stay connected anywhere, anytime. 💾</marquee>
+
     </div>
 
-    <div class="features-section mt-5">
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <span class="bi bi-chat-dots-fill"></span>
-                    </div>
-                    <h3>Real-Time Messaging</h3>
-                    <p>Experience instant communication with our real-time chat technology powered by SignalR.</p>
-                </div>
+    <!-- CORE FEATURES -->
+    <section class="features-section">
+        <h2 class="section-title">Core Features</h2>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">💬</span>
+                <h3>Real-Time Messaging</h3>
+                <p>Instant communication powered by SignalR.</p>
             </div>
 
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <span class="bi bi-people-fill"></span>
-                    </div>
-                    <h3>Create Chatrooms</h3>
-                    <p>Build your own communities by creating custom chatrooms for different topics and teams.</p>
-                </div>
+            <div class="feature-card">
+                <span class="feature-icon">👥</span>
+                <h3>Create Chatrooms</h3>
+                <p>Build custom spaces for your teams.</p>
             </div>
 
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <span class="bi bi-shield-check"></span>
-                    </div>
-                    <h3>Secure & Private</h3>
-                    <p>Your conversations are protected with modern security practices and user authentication.</p>
-                </div>
+            <div class="feature-card">
+                <span class="feature-icon">🔒</span>
+                <h3>Secure & Private</h3>
+                <p>Modern security and authentication.</p>
             </div>
         </div>
+    </section>
 
-        <div class="row g-4 mt-4">
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <span class="bi bi-emoji-smile-fill"></span>
-                    </div>
-                    <h3>Message Reactions</h3>
-                    <p>Express yourself with reactions to messages and engage with your community.</p>
-                </div>
+    <!-- EXTRA FEATURES -->
+    <section class="features-section">
+        <h2 class="section-title">Advanced Tools</h2>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">😎</span>
+                <h3>Message Reactions</h3>
+                <p>Express yourself with emoji reactions.</p>
             </div>
 
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <span class="bi bi-gear-fill"></span>
-                    </div>
-                    <h3>Moderation Tools</h3>
-                    <p>Manage your chatrooms with powerful moderation features and role-based permissions.</p>
-                </div>
+            <div class="feature-card">
+                <span class="feature-icon">🛠️</span>
+                <h3>Moderation Tools</h3>
+                <p>Control your chatrooms easily.</p>
             </div>
 
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <span class="bi bi-cloud-fill"></span>
-                    </div>
-                    <h3>Cloud-Based</h3>
-                    <p>Access your conversations from anywhere with our reliable cloud infrastructure.</p>
-                </div>
+            <div class="feature-card">
+                <span class="feature-icon">☁️</span>
+                <h3>Cloud-Based</h3>
+                <p>Access your chats from anywhere.</p>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="cta-section mt-5 text-center">
+    <!-- CALL TO ACTION -->
+    <section class="cta-section">
         <AuthorizeView>
             <Authorized>
-                <h2 class="mb-4">Ready to chat?</h2>
-                <a href="/home" class="btn btn-primary btn-lg px-5">Go to Chatrooms</a>
+                <h2>Ready to chat?</h2>
+                <a href="/home" class="btn">Go to Chatrooms</a>
             </Authorized>
+
             <NotAuthorized>
-                <h2 class="mb-4">Get Started Today</h2>
-                <p class="mb-4">Join thousands of users already chatting on CloudChat</p>
-                <div class="d-flex gap-3 justify-content-center">
-                    <a href="Account/Register" class="btn btn-primary btn-lg px-5">Sign Up</a>
-                    <a href="Account/Login" class="btn btn-outline-primary btn-lg px-5">Login</a>
+                <h2>Get Started Today</h2>
+                <p>Join thousands of users already chatting on CloudChat</p>
+
+                <div class="cta-buttons">
+                    <a href="Account/Register" class="btn">Sign Up</a>
+                    <a href="Account/Login" class="btn">Login</a>
                 </div>
             </NotAuthorized>
         </AuthorizeView>
-    </div>
+    </section>
+
 </div>
 
 <style>
-    .welcome-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 3rem 1rem;
-    }
+@@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-    .hero-section {
-        text-align: center;
-        padding: 4rem 0;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border-radius: 1rem;
-        margin-bottom: 3rem;
-    }
+/* ===== GLOBAL ===== */
+body {
+    overflow-x: hidden;
+    font-family: 'Press Start 2P', monospace;
+    background: linear-gradient(#5aa9ff, #9fd4ff);
+    color: #002244;
+    letter-spacing: 1px;
+}
 
-    .features-section {
-        padding: 2rem 0;
-    }
+/* ===== TOP BAR ===== */
+.xp-topbar {
+    background: linear-gradient(to right, #003399, #2a7fff);
+    color: white;
+    padding: 12px 20px;
+    border-bottom: 4px solid #000;
+    box-shadow: inset 0 -3px 0 #001f66;
+}
 
-    .feature-card {
-        padding: 2rem;
-        border-radius: 0.5rem;
-        background: #f8f9fa;
-        height: 100%;
-        text-align: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+.xp-title {
+    font-size: 14px;
+    text-shadow: 2px 2px #000, 0 0 6px #66ccff;
+}
 
-    .feature-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
+/* ===== MAIN WINDOW ===== */
+.welcome-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
 
-    .feature-icon {
-        font-size: 3rem;
-        color: #667eea;
-        margin-bottom: 1rem;
-    }
 
-    .feature-card h3 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        font-weight: 600;
-    }
+.xp-window {
+    background: linear-gradient(#d6e8ff, #c0dcff);
+    border: 6px solid #000;
+    box-shadow: 12px 12px 0 #000;
+    padding: 30px;
+    position: relative;
+    animation: pixelZoom 0.8s ease;
+}
 
-    .feature-card p {
-        color: #6c757d;
-        margin-bottom: 0;
-    }
+.xp-window::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,0.15),
+        rgba(255,255,255,0.15) 10px,
+        rgba(255,255,255,0.05) 10px,
+        rgba(255,255,255,0.05) 20px
+    );
+    pointer-events: none;
+}
 
-    .cta-section {
-        padding: 4rem 2rem;
-        background: #f8f9fa;
-        border-radius: 1rem;
-    }
+/* ===== HERO ===== */
+.hero-section {
+    background: #cfe3ff;
+    border: 4px solid #000;
+    box-shadow: 6px 6px 0 #000;
+    padding: 50px 30px;
+    text-align: center;
+    animation: pixelFade 1s ease;
+}
 
-    .cta-section h2 {
-        font-weight: 700;
-    }
+.hero-section h1 {
+    font-size: 18px;
+    color: #003399;
+    text-shadow: 2px 2px #fff, 0 0 10px #66ccff;
+}
 
-    @@media (max-width: 768px) {
-        .hero-section {
-            padding: 2rem 1rem;
-        }
+.hero-section p {
+    font-size: 10px;
+    color: #002244;
+}
 
-        .feature-card {
-            margin-bottom: 1rem;
-        }
-    }
+/* ===== BANNER ===== */
+.xp-banner {
+    background: #003399;
+    color: white;
+    border: 3px solid #000;
+    padding: 10px;
+    margin: 30px 0;
+    font-size: 10px;
+    text-shadow: 1px 1px #000;
+}
+
+/* ===== SECTIONS ===== */
+.section-title {
+    font-size: 18px;
+    margin: 40px 0 20px;
+    text-align: center;
+    text-shadow: 2px 2px #fff;
+}
+
+/* ===== FEATURE GRID ===== */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* ===== FEATURE CARD ===== */
+.feature-card {
+    background: #eaf3ff;
+    border: 4px solid #000;
+    box-shadow: 6px 6px 0 #000;
+    font-size: 10px;
+    padding: 16px;
+    text-align: center;
+    animation: pixelFloat 0.8s ease;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.feature-card:hover {
+    transform: translate(-4px, -4px);
+    background: #ffffff;
+}
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.feature-icon {
+    font-size: 18px;
+    display: block;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px #000;
+}
+
+/* ===== CTA ===== */
+.cta-section {
+    margin-top: 60px;
+    background: #cfe3ff;
+    border: 4px solid #000;
+    box-shadow: 6px 6px 0 #000;
+    padding: 40px;
+    text-align: center;
+    animation: pixelFade 1s ease;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+    background: linear-gradient(#ffffff, #cfe3ff);
+    border: 4px solid #000 !important;
+    box-shadow: 4px 4px 0 #000;
+    color: #000;
+    font-size: 12px;
+    padding: 12px 20px;
+    transition: all 0.15s ease;
+}
+
+.btn:hover {
+    background: #ffeb3b;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #000;
+}
+
+.btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #000;
+}
+
+/* ===== ANIMATIONS ===== */
+@@keyframes pixelFade {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@@keyframes pixelZoom {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@@keyframes pixelFloat {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* === GLOBAL FONT SCALE === */
+body {
+    font-size: 12px;
+}
+
+/* HERO */
+.hero-section h1 {
+    font-size: 18px;
+}
+
+.hero-section p {
+    font-size: 10px;
+}
+
+/* SECTION TITLES */
+.section-title {
+    font-size: 14px;
+}
+
+/* FEATURE CARDS */
+.feature-card h3 {
+    font-size: 14px;
+}
+
+.feature-card p {
+    font-size: 10px;
+}
+
+/* CTA */
+.cta-section h2 {
+    font-size: 16px;
+}
+
+.cta-section p {
+    font-size: 10px;
+}
+
+/* BUTTONS */
+.btn {
+    font-size: 10px;
+}
+
 </style>
+
+
